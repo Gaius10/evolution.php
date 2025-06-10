@@ -1,0 +1,17 @@
+{
+    "name": "caio/otimizer",
+    "description": "IA para estimar pontos máximos de funções",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Otimizer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Caio Corrêa Chaves",
+            "email": "ccaioc.correa@gmail.com"
+        }
+    ],
+    "require": {}
+}
