@@ -8,11 +8,10 @@ use Otimizer\Specimen;
 (function () {
     array_map('unlink', array_filter((array) glob(__DIR__ . "/dumps/*")));
     $avaliation = function (Specimen $s) {
-        return $s->x;
+        return -($s->x * $s->x) + 78;
     };
 
-    $target = 35;
-    $app = new Application(10, $target, $avaliation);
+    $app = new Application(10, $avaliation);
     $app->dump(__DIR__ . '/dumps/start.json');
 
     $generation = 1;
@@ -20,12 +19,13 @@ use Otimizer\Specimen;
         $app->avaliate();
         $app->rank();
 
+        $oldChampion = $champion ?? null;
         $champion = $app->getChampion();
-        $app->dump(__DIR__ . "/dumps/d{$generation}.json");
+        $app->dump(__DIR__ . "/dumps/dump_{$generation}.json");
         $generation++;
 
         $app->genocide();
         $app->orgy();
-    } while ($champion->x != $target && $generation < 100);
+    } while (is_null($oldChampion) || abs($champion->x - $oldChampion->x) > 0);
 })();
 
